@@ -1,4 +1,6 @@
 const students = $('.student-item');
+const studentPages = getPages();
+const pageButtons = '<div class="pagination"><ul></ul></div>';
 
 
 function getPages() {
@@ -14,11 +16,22 @@ function showPages(pageNumber, studentList) {
   $.each(studentList, function(index, value){
     if(pageNumber === index) {
       $.each(value, function(i, list){
-        console.log(list);
         $(list).fadeIn('fast');
       })
     }
   });
 }
 
-showPages(0, getPages());
+function appendPageLinks(studentPages){
+  $('.page').append(pageButtons);
+  let pages = studentPages.length;
+  for(var i = 0; i < pages; i++){
+    let buttons = '<li><a href="#">' + i + '</a></li>';
+    $('.pagination ul').append(buttons);
+  }
+}
+
+
+
+appendPageLinks(studentPages);
+showPages(0, studentPages);
